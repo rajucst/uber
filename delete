@@ -1,0 +1,23 @@
+// DataCollectionsDelete.js
+import React, { useState } from 'react';
+import axios from 'axios';
+
+const DataCollectionsDelete = ({ id }) => {
+  const handleDelete = async () => {
+    try {
+      await axios.delete(`/api/data_collections/${id}`);
+      // Handle success, e.g., redirect or update state
+    } catch (error) {
+      // Handle error, e.g., show an error message
+      console.error('Error deleting data collection:', error);
+    }
+  };
+
+  return (
+    <div>
+      <button onClick={handleDelete}>Delete Data Collection</button>
+    </div>
+  );
+};
+
+export default DataCollectionsDelete;
