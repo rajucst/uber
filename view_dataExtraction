@@ -1,0 +1,117 @@
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const UserList = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    // Fetch users from API
+    axios.get('/api/users')
+      .then(response => setUsers(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
+  return (
+    <div>
+      <h2>User List</h2>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>{user.name} - {user.email}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default UserList;
+import React, { useState, useEffect } from 'react';
+import axios from 'axios';
+
+const PostList = () => {
+  const [posts, setPosts] = useState([]);
+
+  useEffect(() => {
+    // Fetch posts from API
+    axios.get('/api/posts')
+      .then(response => setPosts(response.data))
+      .catch(error => console.error(error));
+  }, []);
+
+  return (
+    <div>
+      <h2>Post List</h2>
+      <ul>
+        {posts.map(post => (
+          <li key={post.id}>{post.title} - {post.content}</li>
+        ))}
+      </ul>
+    </div>
+  );
+}
+
+export default PostList;
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const port = 5000;
+
+// Dummy data (replace with your database connection and queries)
+const users = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
+];
+
+const posts = [
+  { id: 1, title: 'Post 1', content: 'Content for post 1', user_id: 1 },
+  { id: 2, title: 'Post 2', content: 'Content for post 2', user_id: 2 },
+];
+
+// Middleware
+app.use(bodyParser.json());
+
+// API routes
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.get('/api/posts', (req, res) => {
+  res.json(posts);
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+const express = require('express');
+const bodyParser = require('body-parser');
+const app = express();
+const port = 5000;
+
+// Dummy data (replace with your database connection and queries)
+const users = [
+  { id: 1, name: 'John Doe', email: 'john@example.com' },
+  { id: 2, name: 'Jane Doe', email: 'jane@example.com' },
+];
+
+const posts = [
+  { id: 1, title: 'Post 1', content: 'Content for post 1', user_id: 1 },
+  { id: 2, title: 'Post 2', content: 'Content for post 2', user_id: 2 },
+];
+
+// Middleware
+app.use(bodyParser.json());
+
+// API routes
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.get('/api/posts', (req, res) => {
+  res.json(posts);
+});
+
+// Start server
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
+npm install express body-parser axios
