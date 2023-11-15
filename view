@@ -1,0 +1,87 @@
+// UserComponent.js
+
+import React, { useState, useEffect } from 'react';
+
+const UserComponent = () => {
+  const [users, setUsers] = useState([]);
+
+  useEffect(() => {
+    // Fetch users data from API
+    fetch('/api/users')
+      .then(response => response.json())
+      .then(data => setUsers(data))
+      .catch(error => console.error('Error fetching users:', error));
+  }, []);
+
+  return (
+    <div>
+      <h1>Users</h1>
+      <ul>
+        {users.map(user => (
+          <li key={user.id}>{user.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default UserComponent;
+// ProductComponent.js
+
+import React, { useState, useEffect } from 'react';
+
+const ProductComponent = () => {
+  const [products, setProducts] = useState([]);
+
+  useEffect(() => {
+    // Fetch products data from API
+    fetch('/api/products')
+      .then(response => response.json())
+      .then(data => setProducts(data))
+      .catch(error => console.error('Error fetching products:', error));
+  }, []);
+
+  return (
+    <div>
+      <h1>Products</h1>
+      <ul>
+        {products.map(product => (
+          <li key={product.id}>{product.name}</li>
+        ))}
+      </ul>
+    </div>
+  );
+};
+
+export default ProductComponent;
+// server.js
+
+const express = require('express');
+const app = express();
+const port = 3001;
+
+app.use(express.json());
+
+const users = [
+  { id: 1, name: 'John Doe' },
+  { id: 2, name: 'Jane Doe' },
+  // Add more users as needed
+];
+
+const products = [
+  { id: 1, name: 'Product A' },
+  { id: 2, name: 'Product B' },
+  // Add more products as needed
+];
+
+app.get('/api/users', (req, res) => {
+  res.json(users);
+});
+
+app.get('/api/products', (req, res) => {
+  res.json(products);
+});
+
+app.listen(port, () => {
+  console.log(`Server is running on port ${port}`);
+});
